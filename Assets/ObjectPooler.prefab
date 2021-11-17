@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &9036544400610129479
 Transform:
@@ -56,7 +56,7 @@ MonoBehaviour:
     size: 1000
   - tag: ShipDebree
     prefab: {fileID: 6618318761573384323, guid: 233611fd36fb0cf44b4e195b444212c5, type: 3}
-    size: 2000
+    size: 1000
   - tag: MicroMissile
     prefab: {fileID: 1975571348520939186, guid: f453d2f3f1125fe4a9156c867c3c9cdd, type: 3}
     size: 1000

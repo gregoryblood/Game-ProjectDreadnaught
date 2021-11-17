@@ -45,13 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bce02a063500b42f6b406b8daf1823d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
-  speed: 5
+  damage: 20
+  speed: 6
   shipLayer:
     serializedVersion: 2
     m_Bits: 128
   teamNumber: 0
   lifetime: 1
+  justSpawned: 1
 --- !u!1 &4129330211109813340
 GameObject:
   m_ObjectHideFlags: 0

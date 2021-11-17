@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 5032748767096970231}
   - component: {fileID: 5032748767096970232}
   - component: {fileID: 1855990976134147695}
+  - component: {fileID: -3554415312661005579}
   m_Layer: 0
   m_Name: Ship4
   m_TagString: Ship
@@ -201,13 +202,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  cost: 1
   maxAttackRange: 5
-  maxSpeed: 1
+  maxSpeed: 2
   turnSpeed: 1
-  force: 10
-  stopDistance: 0.05
+  force: 20
+  stopDistance: 0.2
   targetShip: {fileID: 0}
-  teamNumber: 0
+  teamNumber: 3
+  movedByPlayer: 0
+  weaponsFiring: 0
+  isCapital: 0
 --- !u!50 &5032748767096970231
 Rigidbody2D:
   serializedVersion: 4
@@ -241,10 +246,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a187f950298d04aa91d87f5d037f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 300
+  health: 250
   teamNumber: 0
   deathEffect: BigDeathEffect
   healthSlider: {fileID: 9000544919639564972}
+  hull: {fileID: 5032748767070687528}
   shipColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!120 &1855990976134147695
 LineRenderer:
@@ -349,6 +355,70 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 0
+--- !u!114 &-3554415312661005579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5032748767096970228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d48b9849f26c447b0c3f086260a065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTarget: {x: 0, y: 0, z: 0}
+  planets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &5032748767206954333
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6473866057537172714}
   - component: {fileID: 6473866057537172713}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,7 +603,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6473866057616546740}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: ThrustTrails
   m_TagString: Untagged
   m_Icon: {fileID: 0}

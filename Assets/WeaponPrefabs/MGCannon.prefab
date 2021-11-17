@@ -9,10 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 637296043380020709}
-  - component: {fileID: 637296043380020711}
   - component: {fileID: 637296043380020708}
   - component: {fileID: 1501952572138962315}
-  - component: {fileID: 8025600326133662418}
   m_Layer: 8
   m_Name: MGCannon
   m_TagString: Untagged
@@ -35,22 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &637296043380020711
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637296043380020714}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 8
 --- !u!114 &637296043380020708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,11 +51,18 @@ MonoBehaviour:
   reloadRate: 10
   shotsPerShot: 1
   ammoMax: 74
-  spread: 5
-  shotSound: {fileID: 8300000, guid: c3ad0996a57d224438ccac3adc4d3868, type: 3}
+  spread: 6
+  shotSound: {fileID: 8300000, guid: 7a5357f775a80f44b8cbeb275ddbdd79, type: 3}
+  frigateLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  fighterLayer:
+    serializedVersion: 2
+    m_Bits: 0
   shipLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
+  currentTarget: {fileID: 0}
 --- !u!82 &1501952572138962315
 AudioSource:
   m_ObjectHideFlags: 0
@@ -86,13 +75,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.3
   m_Pitch: 0.8
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 102
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 10
@@ -100,7 +89,7 @@ AudioSource:
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -170,24 +159,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!50 &8025600326133662418
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637296043380020714}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0

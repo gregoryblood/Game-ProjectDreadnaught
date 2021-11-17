@@ -9,6 +9,7 @@ TagManager:
   - Planet
   - Colors
   - Fighter
+  - Deployer
   layers:
   - Default
   - TransparentFX
@@ -17,18 +18,18 @@ TagManager:
   - Water
   - UI
   - Background
-  - Ship
+  - 
   - Trigger
   - Projectile
-  - Selectors
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ship0
+  - Ship1
+  - Ship2
+  - Ship3
+  - Fighter0
+  - Fighter1
+  - Fighter2
+  - Fighter3
   - 
   - 
   - 

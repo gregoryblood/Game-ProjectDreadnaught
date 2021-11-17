@@ -51,6 +51,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   teamNumber: 0
+  lifetime: 0
 --- !u!1 &5950181562998090586
 GameObject:
   m_ObjectHideFlags: 0

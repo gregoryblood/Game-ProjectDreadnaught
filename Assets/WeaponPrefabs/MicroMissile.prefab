@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6c757f86fe30446bda79cf1e12f1f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  looseness: 5
+  looseness: 10
 --- !u!1 &1975571348513753857
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,3 +295,5 @@ MonoBehaviour:
   actualMissile: {fileID: 5438497801588586082}
   speed: 5
   teamNumber: 0
+  justSpawned: 0
+  lifeTime: 0

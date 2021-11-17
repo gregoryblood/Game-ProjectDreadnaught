@@ -130,8 +130,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 40
-  speed: 15
+  speed: 12
   shipLayer:
     serializedVersion: 2
     m_Bits: 128
   teamNumber: 0
+  lifetime: 0
+  piercing: 1
+  justSpawned: 1
