@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ScoreTracker : MonoBehaviour
 {
-    public int capturedPlanets;
+    public int capturedPlanets = 0;
     [SerializeField] Slider scoreSlider;
     [SerializeField] float objectiveScale;
     [SerializeField] float baseRate;
@@ -10,11 +10,6 @@ public class ScoreTracker : MonoBehaviour
     [SerializeField] GameObject loseScreen;
     [SerializeField] GameObject [] buildScreens;
     bool lost = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

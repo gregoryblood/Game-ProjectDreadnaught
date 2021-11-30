@@ -20,10 +20,12 @@ public class WeaponScript : MonoBehaviour
     float scanTimer = 0;
     //public List<Collider2D> targets = new List<Collider2D>();
     public GameObject currentTarget;
-    ShipControl ship;
+    public ShipControl ship;
     AudioSource audioSource;
     ObjectPooler objectPooler;
-    ShipMaster shipMaster;
+    public ShipMaster shipMaster;
+    public GameObject obj; //Projectile fired
+    public Collider2D currentTargetCol;
     bool targetIsFighter;
     // Start is called before the first frame update
     void Start()
@@ -32,7 +34,7 @@ public class WeaponScript : MonoBehaviour
         objectPooler = ObjectPooler.Instance;
         audioSource = GetComponent<AudioSource>();
         ship = GetComponentInParent<ShipControl>();
-
+        GetComponent<RangeDrawer>().radius = range;
         if (ship.maxAttackRange < range)
         {
             ship.maxAttackRange = range;
@@ -49,6 +51,7 @@ public class WeaponScript : MonoBehaviour
             }
 
         }
+        Prep();
         //InvokeRepeating("ReadTargets", 0, 0.1f);
     }
     void ReadTargets()
@@ -85,10 +88,11 @@ public class WeaponScript : MonoBehaviour
         //Look for big ships
         foreach (Collider2D target in Physics2D.OverlapCircleAll(transform.position, range, frigateLayer))
         {
-            if (shipMaster.DamageShip(target.GetInstanceID(), -1, target.transform.position))
+            if (shipMaster.DamageShip(target.GetInstanceID(), 0, target.transform.position))
             {
                 targetIsFighter = false;
                 currentTarget = target.transform.parent.gameObject;
+                currentTargetCol = target;
                 return;
             }
         }
@@ -98,10 +102,11 @@ public class WeaponScript : MonoBehaviour
         //Look for little ships
         foreach (Collider2D target in Physics2D.OverlapCircleAll(transform.position, range, fighterLayer))
         {
-            if (shipMaster.DamageShip(target.GetInstanceID(), -1, target.transform.position))
+            if (shipMaster.DamageShip(target.GetInstanceID(), 0, target.transform.position))
             {
                 currentTarget = target.transform.parent.gameObject;
                 targetIsFighter = true;
+                currentTargetCol = target;
                 return;
             }
         }
@@ -110,10 +115,17 @@ public class WeaponScript : MonoBehaviour
     {
         if (scanTimer < Time.time)
         {
-            ship.weaponsFiring = false;
-            scanTimer = Time.time + 0.2f;
-            ReadTargets();
+            if (range > 0)
+            {
+                ship.weaponsFiring = false;
+                scanTimer = Time.time + 0.2f;
+                ReadTargets();
+            }
         }
+        Chamber();
+    }
+    public void Chamber()
+    {
         if (currentTarget != null)
         {
             ship.weaponsFiring = true;
@@ -137,8 +149,12 @@ public class WeaponScript : MonoBehaviour
                         return;
                     transform.up = (currentTarget.transform.position - transform.position);
                     transform.Rotate(Vector3.forward, Random.Range(-spread, spread));
-                    GameObject bullet = objectPooler.SpawnFromPool(projectile, transform.position, transform.rotation);
-                    Fire(bullet, ship, currentTarget, this);
+                    obj = null;
+                    if (projectile.Length > 0)
+                    {
+                        obj = objectPooler.SpawnFromPool(projectile, transform.position, transform.rotation);
+                    }
+                    Fire();
 
                     if (ammo < 1) //Prevent shooting more than 0 ammo
                         break;
@@ -147,8 +163,12 @@ public class WeaponScript : MonoBehaviour
             }
         }
     }
-    public virtual void Fire(GameObject obj, ShipControl ship, GameObject currentTarget, WeaponScript weapon)
+    public virtual void Fire()
     {
         
+    }
+    public virtual void Prep()
+    {
+
     }
 }

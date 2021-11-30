@@ -19,7 +19,7 @@ public class ShipMaster : MonoBehaviour
     {
         if (!ships[id])
             return false;
-        if (damage > -1)
+        if (damage > 0)
             ships[id].TakeDamage(damage, p);
         return true;
 

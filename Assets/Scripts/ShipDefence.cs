@@ -3,15 +3,20 @@ using UnityEngine;
 public class ShipDefence : MonoBehaviour
 {
     public float health = 100;
+    public float repairDelay = 5f;
+    public float healthRegen = 1f;
+    public float armor = 0;
     public int teamNumber;
     [SerializeField] string deathEffect;
     [SerializeField] Slider healthSlider;
     ObjectPooler objectPooler;
     ShipMaster shipMaster;
-    [SerializeField] Collider2D hull;
+    public Collider2D hull;
     public Color shipColor;
     float MaxHealth;
     bool isSelected;
+    float repairTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +40,24 @@ public class ShipDefence : MonoBehaviour
         isSelected = false;
         //healthSlider.GetComponentInParent<Canvas>().worldCamera = Camera.main;
     }
+
+    private void Update()
+    {
+        if (health < MaxHealth)
+        {
+            if (Time.time > repairTimer)
+            {
+                health += healthRegen * Time.deltaTime;
+            }
+            if (isSelected)
+                healthSlider.value = health / MaxHealth;
+        }
+    }
     public void TakeDamage(float damage, Vector3 position)
     {
+        damage -= armor;
+        if (damage <= 0)
+            return;
         health -= damage;
         //Ship Dies
         if (health < 1)
@@ -49,6 +70,7 @@ public class ShipDefence : MonoBehaviour
         }
         else //Ship doesnt die
         {
+            repairTimer = Time.time + repairDelay;
             if (healthSlider && isSelected)
                 healthSlider.value = health / MaxHealth;
             //Red hits

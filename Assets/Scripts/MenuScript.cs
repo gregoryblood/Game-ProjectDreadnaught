@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MenuScript : MonoBehaviour
@@ -7,14 +6,25 @@ public class MenuScript : MonoBehaviour
     [SerializeField] GameObject MenuScreen;
     [SerializeField] GameObject ShowShips;
     [SerializeField] GameObject ShipMenu;
+    [SerializeField] GameObject Abilities;
+    [SerializeField] GameObject Cancel;
+    public bool cancelAbility = false;
     [SerializeField] PlayerBank bank;
+
+    public static MenuScript Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     public void ToggleMenu()
     {
         MenuScreen.SetActive(!MenuScreen.activeSelf);
+        Debug.Log("clicked");
     }
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(0);
     }
     public void ShipToggle()
     {
@@ -25,4 +35,5 @@ public class MenuScript : MonoBehaviour
     {
         bank.SpawnShip(ship);
     }
+
 }

@@ -91,14 +91,14 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.22785567
-        value: 0.5605447
-        inSlope: -1.6478878
-        outSlope: -1.6478878
+        time: 0.7004204
+        value: 1
+        inSlope: 0.009871674
+        outSlope: 0.009871674
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.35261837
-        outWeight: 0.33333334
+        inWeight: 1
+        outWeight: 0.613279
       - serializedVersion: 3
         time: 1
         value: 0
@@ -253,8 +253,10 @@ MonoBehaviour:
   damage: 13
   speed: 10
   turnSpeed: 2
+  hitEffect: BigHitEffect
   shipLayer:
     serializedVersion: 2
     m_Bits: 128
   teamNumber: 0
   target: {fileID: 0}
+  weapon: {fileID: 0}

@@ -14,6 +14,7 @@ public class ShipDeployment : MonoBehaviour
     [SerializeField] ScoreTracker scoreTracker;
     GameObject squad;
     Color color;
+    Quaternion startRotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +26,9 @@ public class ShipDeployment : MonoBehaviour
         }
         else
         {
-            InvokeRepeating("SpawnPlayerWave", 0, waveSpawnRate);
+            InvokeRepeating("SpawnPlayerWave", 0.5f, waveSpawnRate);
         }
-        transform.up = planets[0].transform.position - transform.position;
+        startRotation = transform.rotation;
     }
     void SpawnPlayerWave()
     {
@@ -63,7 +64,6 @@ public class ShipDeployment : MonoBehaviour
     {
         GameObject ship = ships[i];
         ShipControl sc = ships[i].GetComponent<ShipControl>();
-
         sc.teamNumber = teamNumber;
 
         AutoControl ac = ship.GetComponent<AutoControl>();
@@ -71,9 +71,11 @@ public class ShipDeployment : MonoBehaviour
         {
             ac.planets[x] = planets[x].GetComponent<ObjectiveScript>();
         }
+        Vector2 spawnPos = (Random.insideUnitCircle * 2f) + (Vector2)transform.position;
+
         Instantiate(ship,
-            (Random.insideUnitCircle * 3f) + (Vector2)transform.position,
-            transform.rotation);
+            spawnPos,
+            startRotation);
     }
     public void SpawnShip(int i)
     {
@@ -90,9 +92,10 @@ public class ShipDeployment : MonoBehaviour
     void SpawnFighter()
     {
 
-        FighterScript ship = Instantiate(fighter,
+        FighterScript ship = Instantiate(
+            fighter,
             (Random.insideUnitCircle * 2) + (Vector2)transform.position,
-            transform.rotation).GetComponent<FighterScript>();
+            startRotation).GetComponent<FighterScript>();
         ship.teamNumber = teamNumber;
         for (int i = 0; i < planets.Count; i++)
         {
@@ -101,7 +104,12 @@ public class ShipDeployment : MonoBehaviour
     }
     private void OnDestroy()
     {
-        if (scoreTracker && teamNumber == 0)
-            scoreTracker.LoseGame();
+        if (scoreTracker)
+        {
+            if (teamNumber == 0)
+            {
+                scoreTracker.LoseGame();
+            }
+        }
     }
 }

@@ -32,15 +32,17 @@ public class AutoControl : MonoBehaviour
         }
         if (shipControl.teamNumber != 0)
         {
-            playerCapital = GameObject.Find("PlayerCapital").transform;
+            GameObject playerCap;
+            if (playerCap = GameObject.Find("PlayerCapital"))
+                playerCapital = playerCap.transform;
         }
     }
 
     private void Update()
     {
-        if ((frameDif + Time.frameCount) % 20 != 0) return;
+        if ((frameDif + Time.frameCount) % 5 != 0) return;
         if (shipControl.movedByPlayer)
-            Destroy(this);
+            this.enabled = false;
         //Objective movement
         if (!planets[currentObjNum])
         {
@@ -48,13 +50,17 @@ public class AutoControl : MonoBehaviour
                 MoveToNextObjective(playerCapital.position);
             return;
         }
-        if (Vector3.Distance(transform.position, moveTarget) < 2f)
+        else if (Vector3.Distance(transform.position, moveTarget) < 2f)
         {
             if (planets[currentObjNum].holdingTeam == shipControl.teamNumber)
             {
                 currentObjNum++;
                 if (planets[currentObjNum])
                     MoveToNextObjective(planets[currentObjNum].transform.position);
+                else
+                {
+                    shipControl.isSniper = true;
+                }
             }
         }
 

@@ -7,6 +7,7 @@ public class MissileScript : MonoBehaviour
     [SerializeField] int damage = 20;
     [SerializeField] float speed = 10f;
     [SerializeField] float turnSpeed = 90f;
+    [SerializeField] string hitEffect;
     public LayerMask shipLayer;
     public float teamNumber;
     public GameObject target;
@@ -27,7 +28,7 @@ public class MissileScript : MonoBehaviour
     }
     void Explode()
     {
-        objectPooler.SpawnFromPool("HitEffect", transform.position, transform.rotation);
+        objectPooler.SpawnFromPool(hitEffect, transform.position, transform.rotation);
         gameObject.SetActive(false);
     }
     // Update is called once per frame

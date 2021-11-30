@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5756155671557770086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.75, y: -7.91, z: 0}
+  m_LocalPosition: {x: -15.75, y: 4.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,6 +55,7 @@ MonoBehaviour:
   - {fileID: 2017648606408025735, guid: 5455facb5db63e0419782baab0a6792c, type: 3}
   - {fileID: 2971675561437730629, guid: 5c6b4aae2639bfd4fb8db9e887307cdf, type: 3}
   - {fileID: 2576150146051570483, guid: 9ab05fdd1ca1986479f8adffe0ffe17f, type: 3}
+  - {fileID: 5641913782393874725, guid: ede32691346b99447a25a51a4881c272, type: 3}
   planets: []
   scoreTracker: {fileID: 0}
 --- !u!114 &8965270852264308592

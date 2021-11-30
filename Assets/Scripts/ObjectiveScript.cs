@@ -19,6 +19,7 @@ public class ObjectiveScript : MonoBehaviour
     int currentTeam = -1;
     public int holdingTeam = -1; //Who owns complete control
     float totalShips = 0;
+    bool maxCap = false;
     // Start is called before the first frame update
     private void Start()
     {
@@ -27,7 +28,8 @@ public class ObjectiveScript : MonoBehaviour
             ships.Add(0);
             colors.Add(color);
         }
-        //scoreTracker = GameObject.FindGameObjectWithTag("ScoreTracker").GetComponent<ScoreTracker>();
+
+        scoreTracker = GameObject.Find("ScoreTracker").GetComponent<ScoreTracker>();
     }
     private void Update()
     {
@@ -40,7 +42,14 @@ public class ObjectiveScript : MonoBehaviour
             holdingTeam = -1;
             //slider.value -= (ships[leaderTeam] - (totalShips - ships[leaderTeam])) * Time.deltaTime * capRate;
             slider.value -= Time.deltaTime * capRate;
-
+            if (maxCap)
+            {
+                maxCap = false;
+                if (holdingTeam == 0)
+                {
+                    scoreTracker.capturedPlanets--;
+                }
+            }
         }
         else
         {
@@ -50,15 +59,26 @@ public class ObjectiveScript : MonoBehaviour
                 if (slider.value < 1f)
                 {
                     currentTeam = leaderTeam;
-                    fill.color = colors[leaderTeam];
+                    fill.color = colors[currentTeam];
                 }
                 //slider.value += (ships[leaderTeam] - (totalShips - ships[leaderTeam])) * Time.deltaTime * capRate;
                 slider.value += Time.deltaTime * capRate;
             }
             else
             {
-                //justCaptured = true;//This is to not call send orders a lot
-                holdingTeam = leaderTeam;
+                if (!maxCap)
+                {
+                    holdingTeam = leaderTeam;
+                    maxCap = true;
+
+                    if (holdingTeam == 0)
+                    {
+                        scoreTracker.capturedPlanets++;
+                    }
+
+                    
+
+                }
                 //SendOrders(currentTeam);
                 return;
             }
@@ -68,7 +88,7 @@ public class ObjectiveScript : MonoBehaviour
 
     void CalcLeader()
     {
-        float leaderShips = -1;
+        float leaderShips = 0;
         leaderTeam = -1;
         for (int i = 0; i < ships.Count; i++)
         {
@@ -81,9 +101,9 @@ public class ObjectiveScript : MonoBehaviour
                 }
             }
         }
-        if (leaderTeam > -1)
+        if (leaderTeam != -1)
         {
-            if (leaderShips <= totalShips - ships[leaderTeam])
+            if (leaderShips < totalShips - ships[leaderTeam])
                 leaderTeam = -1;
         }
 

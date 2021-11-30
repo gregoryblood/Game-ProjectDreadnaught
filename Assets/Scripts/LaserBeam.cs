@@ -46,7 +46,7 @@ public class LaserBeam : MonoBehaviour
                     audioSource.PlayOneShot(shotSound);
                     beam.enabled = true;
                     beam.SetPosition(0, transform.position);
-                    beam.SetPosition(1, target.transform.position);
+                    beam.SetPosition(1, target.attachedRigidbody.position);
                     fighter.attackTarget = target.gameObject;
                     break;
                 }

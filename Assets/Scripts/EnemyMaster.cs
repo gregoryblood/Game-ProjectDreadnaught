@@ -22,7 +22,7 @@ public class EnemyMaster : MonoBehaviour
         shipDeployer = GetComponent<ShipDeployment>();
         ships = shipDeployer.ships;
         fighter = shipDeployer.fighter;
-        InvokeRepeating("Squad", 0, shipDeployer.waveSpawnRate*2f);
+        InvokeRepeating("Squad", 0.5f, shipDeployer.waveSpawnRate*2f);
         tokenIncreseTimer = Time.time + tokenIncreaseRate;
     }
     private void Update()
@@ -32,7 +32,7 @@ public class EnemyMaster : MonoBehaviour
         if (tokenIncreseTimer < Time.time)
         {
             tokenIncreseTimer = Time.time + tokenIncreaseRate;
-            tokenIncreaseRate *= 2;
+            tokenIncreaseRate *= 1.5f;
             maxTokens++;
         }
     }

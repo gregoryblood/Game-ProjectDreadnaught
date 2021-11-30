@@ -6,6 +6,7 @@ public class MicroMissile : MonoBehaviour
 {
     [SerializeField] int damage = 20;
     [SerializeField] float blastRange = 5f;
+    [SerializeField] string hitEffect;
     public LayerMask shipLayer;
     [SerializeField] Transform actualMissile;
     public float speed = 10f;
@@ -14,6 +15,7 @@ public class MicroMissile : MonoBehaviour
     ShipMaster shipMaster;
     public bool justSpawned;
     public float lifeTime;
+    public Vector3 target;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class MicroMissile : MonoBehaviour
         {
             lifeTime = Time.time + lifeTime;
             justSpawned = false;
+            transform.up = (target - transform.position);
         }
         else if (lifeTime < Time.time)
         {
@@ -39,12 +42,11 @@ public class MicroMissile : MonoBehaviour
 
     void Explode()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(actualMissile.position, blastRange, shipLayer);
-        foreach (Collider2D hit in hits)
+        foreach (Collider2D hit in Physics2D.OverlapCircleAll(actualMissile.position, blastRange, shipLayer))
         {
             shipMaster.DamageShip(hit.GetInstanceID(), damage, transform.position);
         }
-        objectPooler.SpawnFromPool("HitEffect", transform.position, transform.rotation);
+        objectPooler.SpawnFromPool(hitEffect, transform.position, transform.rotation);
         gameObject.SetActive(false);
     }
 

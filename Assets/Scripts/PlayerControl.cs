@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PlayerControl : MonoBehaviour
 {
+    public bool interactingElsewhere = false; //for things like menu interacton
     [SerializeField] GameObject clickEffect;
     public int teamNumber = 0;
     [SerializeField] LayerMask shipLayer;
@@ -14,7 +13,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] float selectingScaler = 1f;
     //Camera Settings
     Camera cam;
-    [SerializeField] static float maxZoom = 30;
+    [SerializeField] static float maxZoom = 35;
     [SerializeField] static float minZoom = 3;
     [SerializeField] float zoomSensitivity = 10f;
     [SerializeField] Transform background;
@@ -23,11 +22,17 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] float speed = 5;
     private int theScreenWidth;
     private int theScreenHeight;
+
     Vector3 mp; //MousePosition
     //Mobile
     bool isZooming = false;
     Vector2[] lastZoomPositions; // Touch mode only
+    public static PlayerControl Instance;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +43,7 @@ public class PlayerControl : MonoBehaviour
         Application.targetFrameRate = 144;
         QualitySettings.vSyncCount = 1;
         InvokeRepeating("CheckScreen", 1f, 1f);
+
     }
     void CheckScreen()
     {
@@ -79,11 +85,11 @@ public class PlayerControl : MonoBehaviour
     }
 
     //[Client]
-    void Update()
+    void LateUpdate()
     {
+        if (interactingElsewhere)
+            return;
         //if (!isLocalPlayer) return;
-
-
         if (Input.touchSupported && Application.platform != RuntimePlatform.WebGLPlayer)
         {
             //Camera Zooming
@@ -105,6 +111,7 @@ public class PlayerControl : MonoBehaviour
         mp = Input.mousePosition;
         if (Input.GetMouseButtonDown(0))
         {
+            //Unselect stuff
             if (currentShip)
             {
                 currentShip.UnSelect();
@@ -114,6 +121,7 @@ public class PlayerControl : MonoBehaviour
             {
                 enemySelected.UnSelect();
             }
+            //If you clicked a ship
             if (currentShip = Click())
             {
                 currentShip.Select();
@@ -127,6 +135,7 @@ public class PlayerControl : MonoBehaviour
                     line.enabled = true;
                 }
             }
+
             touchStart = cam.ScreenToWorldPoint(mp);
         }
         else if (Input.GetMouseButtonUp(0) && currentShip)
@@ -192,11 +201,13 @@ public class PlayerControl : MonoBehaviour
         }
         else if (Input.GetKeyDown("="))
         {
-            Time.timeScale += 0.25f;
+            if (Time.timeScale < 16f)
+                Time.timeScale *= 2f;
         }
         else if (Input.GetKeyDown("-"))
         {
-            Time.timeScale -= 0.25f;
+            if (Time.timeScale >= 0.5f)
+                Time.timeScale /= 2f;
         }
         else if (Input.GetKeyDown("1"))
         {
@@ -243,7 +254,7 @@ public class PlayerControl : MonoBehaviour
     }
     ShipControl Click()
     {
-        ShipControl ship = null;
+        ShipControl ship;
         ShipControl closetShip = null;
         float dist = 1000f;
         //Find closest ship to pointer

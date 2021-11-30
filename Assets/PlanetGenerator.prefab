@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numPlanets: 5
   randomPlanets: 1
-  range: 30
+  range: 35
   planetsPrefabs:
   - {fileID: 8763851664120937400, guid: 3ac01d3eacf24c84ca3fefcb3b059486, type: 3}
   - {fileID: 1123043364561809469, guid: deeff4f9b8d7c7c478d89c30479e5edd, type: 3}
@@ -150,7 +150,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 2
+    textureMode: 0
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0

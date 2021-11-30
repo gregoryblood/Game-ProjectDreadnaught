@@ -17,6 +17,6 @@ public class ScatterMissile : MonoBehaviour
     void Update()
     {
         timeSinceAwake += Time.deltaTime/2f;
-        transform.localPosition = new Vector3(Mathf.Sin(timeSinceAwake * looseness), 0, 0);
+        transform.localPosition = new Vector3(Mathf.Sin(timeSinceAwake * looseness) * 2f, 0, 0);
     }
 }

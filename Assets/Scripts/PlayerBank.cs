@@ -3,13 +3,21 @@ using UnityEngine;
 using TMPro;
 public class PlayerBank : MonoBehaviour
 {
-    [SerializeField] int coins;
+    public int coins;
     [SerializeField] float coinRate;
     float coinTimer;
     ShipDeployment spawner;
     GameObject[] ships;
     [SerializeField] TMP_Text coinText;
     [SerializeField] Slider slider;
+
+    public static PlayerBank Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +35,8 @@ public class PlayerBank : MonoBehaviour
     }
     private void Update()
     {
+        if (!spawner)
+            return;
         if (coinTimer < Time.time)
         {
             coinTimer = Time.time + coinRate;
@@ -38,6 +48,8 @@ public class PlayerBank : MonoBehaviour
     }
     public void SpawnShip(int i)
     {
+        if (!spawner)
+            return;
         if (i == -1 && coins >= 1) {
             coins--;
             spawner.SpawnShip(i);
@@ -51,7 +63,11 @@ public class PlayerBank : MonoBehaviour
                 spawner.SpawnShip(i);
             }
          }     
+        coinText.text = coins.ToString(); 
+    }
+    public void Exchange(int difference)
+    {
+        coins -= difference;
         coinText.text = coins.ToString();
-        
     }
 }

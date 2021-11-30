@@ -15,3 +15,14 @@ Update Mode: updateDependencies
 
 The following packages were updated:
   com.unity.render-pipelines.universal from version 12.1.1 to 13.1.0
+
+=== Fri Nov 26 22:45:45 2021
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.2d.animation from version 7.0.0 to 8.0.0-pre.3
+  com.unity.2d.psdimporter from version 6.0.0 to 7.0.0-pre.3
+  com.unity.2d.spriteshape from version 7.0.0 to 8.0.0-pre.4
+  com.unity.2d.tilemap.extras from version 2.2.0 to 3.0.0

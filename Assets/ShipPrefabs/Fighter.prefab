@@ -51,12 +51,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 0.25
-  beamDuration: 0.05
+  beamDuration: 0.1
   shipLayer:
     serializedVersion: 2
     m_Bits: 0
   range: 4
-  damage: 3
+  damage: 2
   shotSound: {fileID: 8300000, guid: 0150f2e7ed1007748a2769dd10c72b77, type: 3}
   teamNumber: 0
 --- !u!120 &4442595613109667980
@@ -185,50 +185,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 1
   speed: 1
+  warpSound: {fileID: 8300000, guid: 928072bf8182da1488138cd39d122547, type: 3}
   teamNumber: 0
   moveTarget: {x: 0, y: 0, z: 0}
   attackTarget: {fileID: 0}
   planets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -252,6 +213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 13
+  repairDelay: 5
+  healthRegen: 0.5
   teamNumber: 0
   deathEffect: DeathEffect
   healthSlider: {fileID: 0}
@@ -384,7 +347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4442595613323549861}
   - component: {fileID: 4442595613323549860}
-  m_Layer: 7
+  m_Layer: 15
   m_Name: hull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +396,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4442595614241848271}
   - component: {fileID: 4442595614241848257}
-  - component: {fileID: 4442595614241848270}
   m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
@@ -508,21 +470,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4442595614241848270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4442595614241848268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22a187f950298d04aa91d87f5d037f71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 20
-  teamNumber: 0
-  deathEffect: 
-  healthSlider: {fileID: 0}
-  hull: {fileID: 0}
-  shipColor: {r: 1, g: 1, b: 1, a: 1}
